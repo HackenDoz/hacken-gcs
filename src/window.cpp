@@ -3,20 +3,22 @@
 #include <QDebug>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QTextEdit>
 #include <QToolBar>
 #include <QWidgetAction>
 
 Window::Window() {
     setObjectName("window");
 
-    mdiArea = new QMdiArea(this);
-    setCentralWidget(mdiArea);
-
+    setDockNestingEnabled(true);
     setupActions();
     setupMenus();
 
     QString str = QString("Test");
     createDock(str, new QWidget(this), Qt::LeftDockWidgetArea);
+    createDock(str, new QWidget(this), Qt::RightDockWidgetArea);
+    createDock(str, new QWidget(this), Qt::RightDockWidgetArea);
+    createDock(str, new QWidget(this), Qt::RightDockWidgetArea);
     createDock(str, new QWidget(this), Qt::RightDockWidgetArea);
 
     QActionGroup *toolbarGroup1 = new QActionGroup(this);
