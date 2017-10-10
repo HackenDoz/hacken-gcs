@@ -14,7 +14,7 @@ public:
     Window();
 
     void createDock(QString &title, QWidget* widget, Qt::DockWidgetArea area);
-    void createToolbar();
+    void createToolbar(QString &title, QActionGroup *actions, Qt::ToolBarArea area);
 
 private:
     QMenu *menuFile;
@@ -32,4 +32,5 @@ private:
 
 private slots:
     void about();
+
 };

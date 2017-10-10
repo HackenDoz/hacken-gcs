@@ -1,7 +1,10 @@
 #include "window.h"
 
+#include <QDebug>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QToolBar>
+#include <QWidgetAction>
 
 Window::Window() {
     setObjectName("window");
@@ -14,6 +17,15 @@ Window::Window() {
 
     QString str = QString("Test");
     createDock(str, new QWidget(this), Qt::LeftDockWidgetArea);
+    createDock(str, new QWidget(this), Qt::RightDockWidgetArea);
+
+    QActionGroup *toolbarGroup1 = new QActionGroup(this);
+    toolbarGroup1->addAction("Hi");
+    createToolbar(str, toolbarGroup1, Qt::TopToolBarArea);
+
+    QActionGroup *toolbarGroup2 = new QActionGroup(this);
+    toolbarGroup2->addAction("Bye");
+    createToolbar(str, toolbarGroup2, Qt::TopToolBarArea);
 }
 
 void Window::setupActions() {
@@ -36,14 +48,17 @@ void Window::createDock(QString &title, QWidget *widget, Qt::DockWidgetArea area
     docks.push_back(dock);
     addDockWidget(area, dock);
 
-    int index = docks.length() - 1;
-    connect(dock, &QObject::destroyed, [this, index]{
-        docks.removeAt(index);
+    connect(dock, &QObject::destroyed, [this, &dock]{
+        docks.removeOne(dock);
     });
 }
 
-void Window::createToolbar() {
-
+void Window::createToolbar(QString &title, QActionGroup *actions, Qt::ToolBarArea area) {
+    QToolBar *toolbar = new QToolBar(title, this);
+    toolbar->setObjectName(title);
+    toolbar->addActions(actions->actions());
+    toolbars.push_back(toolbar);
+    addToolBar(toolbar);
 }
 
 void Window::about() {
