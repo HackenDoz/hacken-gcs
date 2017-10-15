@@ -32,6 +32,7 @@ void ArtificialHorizon::paintEvent(QPaintEvent *event) {
 //    painter.drawLine(w / 2, 0, w / 2, h);
     painter.drawLine(0, h / 2, w, h / 2);
 
+    int gap = h / 7;
     QFont font("monospace", 32);
     QFontMetrics metrics(font);
     painter.setFont(font);
@@ -40,30 +41,29 @@ void ArtificialHorizon::paintEvent(QPaintEvent *event) {
         s[0] = static_cast<char>(i + '0');
         int textw = metrics.width(s);
 
-        painter.drawLine(4 * w / 9, h / 2 + 100 * (i - 1) + 25,
-                         5 * w / 9, h / 2 + 100 * (i - 1) + 25);
-        painter.drawLine(2 * w / 5, h / 2 + 100 * (i - 1) + 50,
-                         3 * w / 5, h / 2 + 100 * (i - 1) + 50);
-        painter.drawLine(4 * w / 9, h / 2 + 100 * (i - 1) + 75,
-                         5 * w / 9, h / 2 + 100 * (i - 1) + 75);
-        painter.drawLine(1 * w / 3, h / 2 + 100 * i,
-                         2 * w / 3, h / 2 + 100 * i);
+        painter.drawLine(4 * w / 9, h / 2 + gap * (i - 1) + gap / 4,
+                         5 * w / 9, h / 2 + gap * (i - 1) + gap / 4);
+        painter.drawLine(2 * w / 5, h / 2 + gap * (i - 1) + gap / 2,
+                         3 * w / 5, h / 2 + gap * (i - 1) + gap / 2);
+        painter.drawLine(4 * w / 9, h / 2 + gap * (i - 1) + 3 * gap / 4,
+                         5 * w / 9, h / 2 + gap * (i - 1) + 3 * gap / 4);
+        painter.drawLine(1 * w / 3, h / 2 + gap * i,
+                         2 * w / 3, h / 2 + gap * i);
 
-        painter.drawLine(4 * w / 9, h / 2 - 100 * (i - 1) - 25,
-                         5 * w / 9, h / 2 - 100 * (i - 1) - 25);
-        painter.drawLine(2 * w / 5, h / 2 - 100 * (i - 1) - 50,
-                         3 * w / 5, h / 2 - 100 * (i - 1) - 50);
-        painter.drawLine(4 * w / 9, h / 2 - 100 * (i - 1) - 75,
-                         5 * w / 9, h / 2 - 100 * (i - 1) - 75);
-        painter.drawLine(1 * w / 3, h / 2 - 100 * i,
-                         2 * w / 3, h / 2 - 100 * i);
+        painter.drawLine(4 * w / 9, h / 2 - gap * (i - 1) - gap / 4,
+                         5 * w / 9, h / 2 - gap * (i - 1) - gap / 4);
+        painter.drawLine(2 * w / 5, h / 2 - gap * (i - 1) - gap / 2,
+                         3 * w / 5, h / 2 - gap * (i - 1) - gap / 2);
+        painter.drawLine(4 * w / 9, h / 2 - gap * (i - 1) - 3 * gap / 4,
+                         5 * w / 9, h / 2 - gap * (i - 1) - 3 * gap / 4);
+        painter.drawLine(1 * w / 3, h / 2 - gap * i,
+                         2 * w / 3, h / 2 - gap * i);
 
+        painter.drawText(1 * w / 3 - textw - 10, h / 2 + gap * i + font.pointSize() / 2, s);
+        painter.drawText(2 * w / 3 + 10, h / 2 + gap * i + font.pointSize() / 2, s);
 
-        painter.drawText(1 * w / 3 - textw - 10, h / 2 - 100 * i + font.pointSize() / 2, s);
-        painter.drawText(2 * w / 3 + 10, h / 2 - 100 * i + font.pointSize() / 2, s);
-
-        painter.drawText(1 * w / 3 - textw - 10, h / 2 + 100 * i + font.pointSize() / 2, s);
-        painter.drawText(2 * w / 3 + 10, h / 2 + 100 * i + font.pointSize() / 2, s);
+        painter.drawText(1 * w / 3 - textw - 10, h / 2 - gap * i + font.pointSize() / 2, s);
+        painter.drawText(2 * w / 3 + 10, h / 2 - gap * i + font.pointSize() / 2, s);
     }
 
 
