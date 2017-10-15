@@ -2,8 +2,10 @@
 
 #include <QCloseEvent>
 
-GCSDockWidget::GCSDockWidget(QString &title, QWidget *parent) : QDockWidget(title, parent)
-{
+GCSDockWidget::GCSDockWidget(QWidget *parent) : QDockWidget(parent) {
+}
+
+GCSDockWidget::GCSDockWidget(QString &title, QWidget *parent) : QDockWidget(title, parent) {
     setObjectName(title);
 }
 

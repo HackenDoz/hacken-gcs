@@ -1,4 +1,5 @@
 #include "window.h"
+#include "artificial_horizon_widget.h"
 
 #include <QDebug>
 #include <QMenuBar>
@@ -15,11 +16,8 @@ Window::Window() {
     setupMenus();
 
     QString str = QString("Test");
-    createDock(str, new QWidget(this), Qt::LeftDockWidgetArea);
-    createDock(str, new QWidget(this), Qt::RightDockWidgetArea);
-    createDock(str, new QWidget(this), Qt::RightDockWidgetArea);
-    createDock(str, new QWidget(this), Qt::RightDockWidgetArea);
-    createDock(str, new QWidget(this), Qt::RightDockWidgetArea);
+    QString horizonName = QString("Artificial Horizon");
+    createDock(horizonName, new ArtificialHorizon(this), Qt::RightDockWidgetArea);
 
     QActionGroup *toolbarGroup1 = new QActionGroup(this);
     toolbarGroup1->addAction("Hi");
