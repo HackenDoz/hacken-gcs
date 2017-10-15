@@ -16,6 +16,7 @@ void ArtificialHorizon::paintEvent(QPaintEvent *event) {
     int h = height();
     int gap = h / 7;
     painter.begin(this);
+    painter.setRenderHint(QPainter::Antialiasing);
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(black);
