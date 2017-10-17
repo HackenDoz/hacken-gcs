@@ -15,8 +15,8 @@ ArtificialHorizon::ArtificialHorizon(QWidget *parent) : QWidget(parent) {
 void ArtificialHorizon::paintEvent(QPaintEvent *event) {
     QPen linePen(Qt::white, 1.5);
     QBrush black(Qt::black, Qt::SolidPattern);
-    QBrush ground(QColor(255, 128, 0), Qt::SolidPattern);
-    QBrush sky(QColor(0, 114, 185), Qt::SolidPattern);
+    QBrush ground(QColor(111, 42, 1), Qt::SolidPattern);
+    QBrush sky(QColor(1, 125, 251), Qt::SolidPattern);
 
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
