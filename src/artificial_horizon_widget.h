@@ -12,7 +12,7 @@ protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    double yaw;
+    double roll;
     double pitch;
     QPainter painter;
 

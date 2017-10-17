@@ -8,6 +8,8 @@
 
 ArtificialHorizon::ArtificialHorizon(QWidget *parent) : QWidget(parent) {
     setObjectName("artificialHorizon");
+    pitch = 12.25;
+    roll = 4;
 }
 
 void ArtificialHorizon::paintEvent(QPaintEvent *event) {
@@ -16,17 +18,13 @@ void ArtificialHorizon::paintEvent(QPaintEvent *event) {
     QBrush ground(QColor(255, 128, 0), Qt::SolidPattern);
     QBrush sky(QColor(0, 114, 185), Qt::SolidPattern);
 
-    int w = width();
-    int h = height();
-    int size = std::max(w, h);
-
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
     painter.setWindow(-100, -100, 200, 200);
 
-    painter.rotate(0);
-    painter.translate(0, pitch);
+    painter.rotate(roll);
+    painter.translate(0, (PITCH10 / 10) * pitch);
 
     // Draw ground
     painter.setPen(Qt::NoPen);
@@ -94,8 +92,8 @@ void ArtificialHorizon::paintEvent(QPaintEvent *event) {
     painter.setBrush(black);
 
     painter.save();
-    painter.translate(0, -3);
-    painter.drawRect(QRectF(-1.5, -0.5, 3, 3));
+    painter.translate(0, -1.5);
+    painter.drawRect(QRectF(-1.5, 0, 3, 3));
 
     // Draw left crosshair
     painter.save();
