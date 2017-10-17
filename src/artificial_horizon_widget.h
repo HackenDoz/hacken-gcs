@@ -14,4 +14,6 @@ private:
     double yaw;
     double pitch;
     QPainter painter;
+
+    void drawPitchLines(int index, QLineF lines[3]);
 };
