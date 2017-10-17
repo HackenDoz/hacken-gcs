@@ -1,6 +1,6 @@
 #include "artificial_horizon_widget.h"
 
-#include <QDebug>
+#include <QResizeEvent>
 
 #define PITCH10 40
 #define PITCH5 (PITCH10 / 2)
@@ -93,6 +93,10 @@ void ArtificialHorizon::paintEvent(QPaintEvent *event) {
     painter.setPen(crossHair);
     painter.setBrush(black);
 
+    painter.save();
+    painter.translate(0, -3);
+    painter.drawRect(QRectF(-1.5, -0.5, 3, 3));
+
     // Draw left crosshair
     painter.save();
     painter.translate(30, 0);
@@ -105,8 +109,14 @@ void ArtificialHorizon::paintEvent(QPaintEvent *event) {
     painter.scale(-1, 1);
     painter.drawPolygon(points, 6);
     painter.restore();
+    painter.restore();
 
     painter.end();
+}
+
+void ArtificialHorizon::resizeEvent(QResizeEvent *event) {
+    int size = qMin(event->size().width(), event->size().height());
+    resize(size, size);
 }
 
 void ArtificialHorizon::drawPitchLines(int i, QLineF lines[3]) {
@@ -127,3 +137,4 @@ void ArtificialHorizon::drawPitchLines(int i, QLineF lines[3]) {
     painter.drawLine(lines[2]);
     painter.restore();
 }
+
