@@ -1,6 +1,7 @@
 #include "artificial_horizon_widget.h"
 
 #include <QResizeEvent>
+#include <math.h>
 
 #define PITCH10 40
 #define PITCH5 (PITCH10 / 2)
@@ -8,8 +9,8 @@
 
 ArtificialHorizon::ArtificialHorizon(QWidget *parent) : QWidget(parent) {
     setObjectName("artificialHorizon");
-    pitch = 12.25;
-    roll = 4;
+    pitch = 0;
+    roll = 5;
 }
 
 void ArtificialHorizon::paintEvent(QPaintEvent *event) {
@@ -108,6 +109,65 @@ void ArtificialHorizon::paintEvent(QPaintEvent *event) {
     painter.drawPolygon(points, 6);
     painter.restore();
     painter.restore();
+
+    painter.setWindow(-100, -100, 200, 200);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
+    for (int i = -3; i <= 3; i++) {
+        if (i == 0) continue;
+        painter.save();
+        double angle = i * 10 * M_PI / 180;
+        painter.translate(95 * sin(angle), -95 * cos(angle));
+        int length = abs(i) <= 2 ? 5 : 10;
+        QLineF line(0, 0, length * sin(angle), -length * cos(angle));
+        painter.drawLine(line);
+        painter.restore();
+    }
+
+    {
+        painter.save();
+        painter.setBrush(sky);
+        QPointF triangle[3] = {
+                QPointF(-5, 0),
+                QPointF(5, 0),
+                QPointF(0, 5),
+        };
+        painter.translate(0, -100);
+        painter.drawPolygon(triangle, 3);
+        painter.restore();
+    }
+
+    {
+        painter.save();
+        double angle = 45 * M_PI / 180;
+        painter.translate(95 * sin(angle), -95 * cos(angle));
+        QLineF line(0, 0, 10 * sin(angle), -10 * cos(angle));
+        painter.drawLine(line);
+        painter.restore();
+    }
+
+    {
+        painter.save();
+        double angle = -45 * M_PI / 180;
+        painter.translate(95 * sin(angle), -95 * cos(angle));
+        QLineF line(0, 0, 10 * sin(angle), -10 * cos(angle));
+        painter.drawLine(line);
+        painter.restore();
+    }
+
+    {
+        painter.save();
+        painter.rotate(roll);
+        painter.setBrush(sky);
+        QPointF triangle[3] = {
+                QPointF(-5, 10),
+                QPointF(5, 10),
+                QPointF(0, 0),
+        };
+        painter.translate(0, -95);
+        painter.drawPolygon(triangle, 3);
+        painter.restore();
+    }
 
     painter.end();
 }
