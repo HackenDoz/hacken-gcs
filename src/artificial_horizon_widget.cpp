@@ -10,7 +10,7 @@
 ArtificialHorizon::ArtificialHorizon(QWidget *parent) : QWidget(parent) {
     setObjectName("artificialHorizon");
     pitch = 0;
-    roll = 5;
+    roll = 10;
 }
 
 void ArtificialHorizon::paintEvent(QPaintEvent *event) {
@@ -164,7 +164,7 @@ void ArtificialHorizon::paintEvent(QPaintEvent *event) {
                 QPointF(5, 10),
                 QPointF(0, 0),
         };
-        painter.translate(0, -95);
+        painter.translate(0, -94);
         painter.drawPolygon(triangle, 3);
         painter.restore();
     }
