@@ -9,7 +9,11 @@ set(SOURCE
         src/main.cpp
         src/window.cpp
         src/window.h
-        src/gcs_dock_widget.cpp src/gcs_dock_widget.h)
+        src/gcs_dock_widget.cpp
+        src/gcs_dock_widget.h
+        src/artificial_horizon_widget.cpp
+        src/artificial_horizon_widget.h
+        )
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Core REQUIRED)
